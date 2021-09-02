@@ -1,0 +1,33 @@
+#step2-section,
+#step3-section {
+    display: none;
+}
+
+#step1-section,
+#step2-section,
+#step3-section{
+    height: 82vh;
+}
+#step1:hover,
+#step2:hover,
+#step3:hover {
+    cursor: pointer;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.row-wrapper{
+    height: -webkit-fill-available;
+}
+
+.instructions-text{
+    display: flex;
+    justify-content: center;
+}
