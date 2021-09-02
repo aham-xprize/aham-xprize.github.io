@@ -1,16 +1,19 @@
 #step2-section,
-#step3-section {
+#step3-section,
+#step4-section {
     display: none;
 }
 
 #step1-section,
 #step2-section,
-#step3-section{
+#step3-section,
+#step4-section{
     height: 82vh;
 }
 #step1:hover,
 #step2:hover,
-#step3:hover {
+#step3:hover,
+#step4:hover {
     cursor: pointer;
 }
 
@@ -27,7 +30,7 @@ body {
     height: -webkit-fill-available;
 }
 
-.instructions-text{
+/* .instructions-text{
     display: flex;
     justify-content: center;
-}
+} */

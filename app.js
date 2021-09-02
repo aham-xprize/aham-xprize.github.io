@@ -1,4 +1,4 @@
-let ids = ['step1-section', 'step2-section', 'step3-section'];
+let ids = ['step1-section', 'step2-section', 'step3-section','step4-section'];
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -17,6 +17,9 @@ function navigateToSection(id) {
             break;
         case 'step3':
             toggleSection(ids[2]);
+            break;
+        case 'step4':
+            toggleSection(ids[3]);
             break;
     }
 }
@@ -60,6 +63,18 @@ function onYouTubeIframeAPIReady() {
         }
     });
     player = new YT.Player('player3', {
+        height: '390',
+        width: '640',
+        videoId: 'M7lc1UVf-VE',
+        playerVars: {
+            'playsinline': 1
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+    player = new YT.Player('player4', {
         height: '390',
         width: '640',
         videoId: 'M7lc1UVf-VE',
