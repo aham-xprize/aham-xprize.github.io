@@ -41,7 +41,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player1', {
         height: '390',
         width: '640',
-        videoId: 'M7lc1UVf-VE',
+        videoId: 'V2LK1V8sTu8',
         playerVars: {
             'playsinline': 1
         },
@@ -53,7 +53,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player2', {
         height: '390',
         width: '640',
-        videoId: 'M7lc1UVf-VE',
+        videoId: 'hBJzHJGfh8U',
         playerVars: {
             'playsinline': 1
         },
@@ -65,7 +65,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player3', {
         height: '390',
         width: '640',
-        videoId: 'M7lc1UVf-VE',
+        videoId: 'i1uMh0bxZqo',
         playerVars: {
             'playsinline': 1
         },
@@ -77,7 +77,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player4', {
         height: '390',
         width: '640',
-        videoId: 'M7lc1UVf-VE',
+        videoId: 'Qe59J63a_wA',
         playerVars: {
             'playsinline': 1
         },
