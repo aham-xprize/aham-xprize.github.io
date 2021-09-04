@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asha's Software</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="software.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark ">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1"><h2>Software Setup Guide</h2></span>
+        </div>
+    </nav>
+    <ul class="nav nav-tabs">
+        <li class="nav-item" id="step1" onclick="navigateToSection(this.id)">
+            <a class="nav-link active">Software Setup</a>
+        </li>
+        <li class="nav-item" id="step2" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Initialization</a>
+        </li>
+        <li class="nav-item" id="step3" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Debugging</a>
+        </li>
+        <!-- <li class="nav-item" id="step4" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Step 4: Zed Mount</a>
+        </li> -->
+    </ul>
+    <section id="step1-section">
+        <div class="row d-flex align-items-center row-wrapper">
+            <div class="col">
+                <div class="container instructions-text">
+                    <h4>Setting up Asha</h4>
+                    <ol>
+                        <li>Power Asha on and make sure all the motors in her hands are set to the zero position. </li>
+                        <li>Using Teamviewer connect to Asha’s NUC using her static IP when connected to an external network. </li>
+                        <li>Open a terminal on Asha’s NUC and type in 
+                            <kbd>$hrsdk start --local_ip &lt;ASHA’S IP></kbd><br>
+                            &lt;ASHA’S IP> is her set static IP. <br>
+                            For example if her IP on eno1 is 192.168.0.110, then command would be <kbd>$hrsdk start --local_ip 192.168.0.110</kbd></li>
+                        <li>To verify if everything is working as expected, go to <code>&lt;ASHA’S IP>:8000/#/motors</code> using a web browser on any device on the same network or on the NUC using teamviewer.</li>
+                    </ol>
+                    <br>
+                    <h4>Setting up Volta</h4>
+                    <ol>
+                        <li>Power on the volta and wait for the LEDs to start blinking blue.</li>
+                        <li>SSH into the using the command <kbd>$ssh volta-4@&lt;VOLTA’S IP></kbd> and password: Botsync@123</li>
+                        <li>Using nano open the bashrc file the command is <kbd>$nano ~/.bashrc</kbd> Make sure the IP for Asha and Volta have been set correctly here</li>
+                        <li>Run <kbd>$ros_core_asha</kbd></li>
+                        <li>Run <kbd>$roslaunch volta_base on_boot.launch</kbd> </li>
+                        The LED strips on the side of the Volta will now be a solid green colour
+                    </ol> 
+                    <br>
+                    <h4>Setting up Jetson AGX</h4>
+                    <ol>
+                        <li>Power on the Xavier and make sure both the dynamixel head mount and the Zed mini camera are connected to it</li>
+                        <li>SSH into the Xavier using the command <kbd>$ssh ashagpu@&lt;XAVIER’S IP></kbd> Password: ashagpu </li>
+                        <li>For the ZED</li>
+                        <ol>
+                            <li>Navigate to the folder with the built zed files by running <kbd> $cd zed-examples/camera streaming/sender/cpp/build </kbd></li>
+                            <li>Run <kbd>./ZED_Streaming_Sender</kbd></li>
+                            If there is an error, then disconnect and reconnect ZED's USB cable from the AGX. 
+                        </ol> 
+                        <li>For the Dynamixel</li>
+                        <ol>
+                            <li>Create a new ssh session using the same command as step 2.</li>
+                            <li>Run <kbd>$cd Hand_Tracking_dev/src/asha_head/scripts</kbd></li>
+                            <li>Run <kbd>$python2 dynamixel_interface.py</kbd></li>
+                            If the screen shows a red error message, adjust the dynamixel position in the head mount till it becomes stiff and the error message stops printing.
+                        </ol> 
+                    </ol> 
+                    <br>
+                    <h4>Setting up the Windows PC</h4>
+                    <ol>
+                        <li>SteamVR</li>
+                        <ol>
+                            <li>Start the SteamVR app on the desktop</li>
+                            <li>Switch on all the trackers. </li>
+                            Confirm that all the trackers, the headset and the base stations are recognized and tracked.
+                            <figure style="padding:10px ;">
+                                <img src="Images/steamVR.PNG" width="30%" height="30%">
+                                <figcaption style="font-size: 12pt;">StreamVR dialog box</figcaption>
+                            </figure>
+                        </ol>
+                        <li>Running the Zed camera stream on the VR headset</li>
+                        <ol>
+                            <li>Click on the Zed Streaming unity app to start the streaming.</li>
+                        </ol>
+                        <li>Running code for Hand Tracking and Haptic gloves</li>
+                        <ol>
+                            <li>Open <code>avatar/VR/ws_server.py</code> with VS Code.</li>
+                            <li>Run ws_server.py without debugging (Shortcut is Ctrl+F5).</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/vr.png" width="85%" height="85%">
+                                <figcaption style="font-size: 12pt;">Executing ws_server.py</figcaption>
+                            </figure>
+                            <li>Open <code>avatar/HapticGloves/src/ws_glove.py</code> with VS code.</li>
+                            <li>Change request_URL on line 22 to the IP of the Linux PC</li>
+                            <li>Run ws_glove.py without debugging (Shortcut is Ctrl+F5).</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/hap.png" width="85%" height="85%">
+                                <figcaption style="font-size: 12pt;">Executing ws_glove.py</figcaption>
+                            </figure>
+                            Switch on the gloves, the indicator LED will turn from green to blue once it connects.
+                        </ol>                        
+                    </ol> 
+                    <br>
+                    <h4>Setting up the Linux PC</h4>
+                    <ol>
+                        <li>Set the appropriate IPs in <code>avatar/env file</code></li>
+                        <li>Set the IP for asha in <code>avatar/Hand_Tracking/docker/ik_entrypoint.sh</code></li>
+                        <li>Set the IP for the windows machine in <code>avatar/Hand_Tracking/src/asha_comm/config/ws_conn_config.yaml</code></li>
+                        <li>Set the IP in <code>imperio/docker/run.env</code></li>
+                        <li>Run <kbd>$tumxinator start asha</kbd> from the avatar directory</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/asha_tmux.png" width="85%" height="85%">
+                            <figcaption style="font-size: 12pt;">Executing tmuxinator start asha</figcaption>
+                        </figure>
+                        <li>Run <kbd>$tmuxinator start audio</kbd> from the avatar directory</li>
+                    </ol> 
+                    <br>
+                    <h4>Back to the Windows PC</h4>
+                    <ol>
+                        <li>Running the Expression Tracking code</li>
+                        <ol>
+                            <li>Open <code>path to code</code> with Visual Studio.</li>
+                            <li>On line 251, change the uri to the IP of the Linux PC</li>
+                            <li>Click play on the Local Windows Debugger</li>
+                            <li>Once the script starts executing, enter <kbd>1+Enter</kbd> to initialize the eye and lip engines.</li>
+                            Enter <kbd>2+Enter</kbd> to start sending the expression data. Enter <kbd>Ctrl+C</kbd> to stop sending data.
+                            <figure style="padding:10px ;">
+                                <img src="Images/expr.png" width="85%" height="85%">
+                                <figcaption style="font-size: 12pt;">Executing expression tracking code</figcaption>
+                            </figure>
+                            <figure style="padding:10px ;">
+                                <img src="Images/expr2.png" width="85%" height="85%">
+                                <figcaption style="font-size: 12pt;">Initializing eye and lip engines</figcaption>
+                            </figure>
+                        </ol>
+                    </ol> 
+                    <br>
+                    <h4>Calibrating the IK</h4><br>
+                    <ol>
+                        <li>Wait for tmuxinator code to complete the initialisation steps on the Linux PC</li>
+                        <li>On a web browser on the Linux PC, go to localhost:5000/</li>
+                        <li>Follow the calibration steps below and instruct the operator to hold the appropriate poses while the position is being recorded.</li>
+                        <ol>
+                            <li>Click on start calibration</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/init.png" width="40%" height="40%">
+                                <figcaption style="font-size: 12pt;">Start calibration</figcaption>
+                            </figure>
+                            <li>Record operator position with the operator's arms wide apart</li>
+                            <div class="row">
+                                <div class="column">
+                                  <img src="Images/cwide.png" width="100%"> 
+                                </div>
+                                <div class="column">
+                                  <img src="Images/wide.jpg" width="100%" >
+                                </div>
+                              </div>
+                            <li>Record operator position with the operator's arms to the front</li>
+                            <div class="row">
+                                <div class="column">
+                                  <img src="Images/cfront.png" width="100%"> 
+                                </div>
+                                <div class="column">
+                                  <img src="Images/front.jpg" width="100%" >
+                                </div>
+                              </div>
+                            <li>Record operator position with the operator's arms to the side</li>
+                            <div class="row">
+                                <div class="column">
+                                  <img src="Images/cside.png" width="100%"> 
+                                </div>
+                                <div class="column">
+                                  <img src="Images/side.jpg" width="100%" >
+                                </div>
+                            </div>
+                            <li>Instruct the operator to go to Asha's zero position</li>
+                            <div class="row">
+                                <div class="column">
+                                  <img src="Images/zero.jpg" width="100%"> 
+                                </div>
+                                <div class="column">
+                                  <img src="Images/zero_side.jpg" width="100%" >
+                                </div>
+                            </div>
+                            <li>Click on Start tracking</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/started.png" width="40%" height="40%">
+                                <figcaption style="font-size: 12pt;">Start tracking</figcaption>
+                            </figure>
+                            <li>See calibration data and verify the values </li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/cdata.png" width="40%" height="40%">
+                                <figcaption style="font-size: 12pt;">Verify calibration data</figcaption>
+                            </figure>
+                            <li>If the calibration data looks good, save the calibration data. If not, repeat calibration procedure.</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/csave.png" width="40%" height="40%">
+                                <figcaption style="font-size: 12pt;">Save calibration data</figcaption>
+                            </figure>
+                        </ol> 
+                    </ol> 
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="step2-section">
+        <div class="row d-flex align-items-center row-wrapper">
+            <div class="col">
+                <div class="container instructions-text">
+                    <h4>heading</h4><br>
+                    <ol>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ol> 
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="step3-section">
+        <div class="row d-flex align-items-center row-wrapper">
+            <div class="col">
+                <div class="container instructions-text">
+                    <h4>heading</h4><br>
+                    <ol>
+                        <li></li><br>
+                        <li></li><br>
+                        <li></li><br>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="step4-section">
+        <div class="row d-flex align-items-center row-wrapper">
+            <div class="col">
+                <div class="container instructions-text">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+    </script>
+    <script src="software.js"></script>
+</body>
+
+</html>
