@@ -22,7 +22,7 @@
             <a class="nav-link active">Software Setup</a>
         </li>
         <li class="nav-item" id="step2" onclick="navigateToSection(this.id)">
-            <a class="nav-link">Initialization</a>
+            <a class="nav-link">Initial Setup</a>
         </li>
         <li class="nav-item" id="step3" onclick="navigateToSection(this.id)">
             <a class="nav-link">Debugging</a>
@@ -49,7 +49,7 @@
                     <h4>Setting up Volta</h4>
                     <ol>
                         <li>Power on the volta and wait for the LEDs to start blinking blue.</li>
-                        <li>SSH into the using the command <kbd>$ssh volta-4@&lt;VOLTA’S IP></kbd> and password: Botsync@123</li>
+                        <li>SSH into the using the command <kbd>$ssh volta-4@&lt;VOLTA’S IP></kbd> with password: Botsync@123</li>
                         <li>Using nano open the bashrc file the command is <kbd>$nano ~/.bashrc</kbd> Make sure the IP for Asha and Volta have been set correctly here</li>
                         <li>Run <kbd>$ros_core_asha</kbd></li>
                         <li>Run <kbd>$roslaunch volta_base on_boot.launch</kbd> </li>
@@ -80,6 +80,8 @@
                         <li>SteamVR</li>
                         <ol>
                             <li>Start the SteamVR app on the desktop</li>
+                            <li>Open menu and select Room Setup. Follow instructions on the screen to set up the VR play area.</li>
+                            Note: Ensure all the trackers are switched off during this step.
                             <li>Switch on all the trackers. </li>
                             Confirm that all the trackers, the headset and the base stations are recognized and tracked.
                             <figure style="padding:10px ;">
@@ -100,22 +102,24 @@
                                 <figcaption style="font-size: 12pt;">Executing ws_server.py</figcaption>
                             </figure>
                             <li>Open <code>avatar/HapticGloves/src/ws_glove.py</code> with VS code.</li>
-                            <li>Change request_URL on line 22 to the IP of the Linux PC</li>
+                            <li>Ensure that request_URL on line 22 is the IP of the Linux PC</li>
                             <li>Run ws_glove.py without debugging (Shortcut is Ctrl+F5).</li>
                             <figure style="padding:10px ;">
                                 <img src="Images/hap.png" width="85%" height="85%">
                                 <figcaption style="font-size: 12pt;">Executing ws_glove.py</figcaption>
                             </figure>
                             Switch on the gloves, the indicator LED will turn from green to blue once it connects.
+                            <li>Test finger curls and haptic feedback. If necessary, calibrate the gloves as mentioned in Initial Setup.</li>
                         </ol>                        
                     </ol> 
                     <br>
                     <h4>Setting up the Linux PC</h4>
                     <ol>
-                        <li>Set the appropriate IPs in <code>avatar/env file</code></li>
+                        <!-- <li>Set the appropriate IPs in <code>avatar/env file</code></li>
                         <li>Set the IP for asha in <code>avatar/Hand_Tracking/docker/ik_entrypoint.sh</code></li>
                         <li>Set the IP for the windows machine in <code>avatar/Hand_Tracking/src/asha_comm/config/ws_conn_config.yaml</code></li>
-                        <li>Set the IP in <code>imperio/docker/run.env</code></li>
+                        <li>Set the IP in <code>imperio/docker/run.env</code></li> -->
+                        <li>Ensure that the correct IPs have set in all the required locations.</li>
                         <li>Run <kbd>$tumxinator start asha</kbd> from the avatar directory</li>
                         <figure style="padding:10px ;">
                             <img src="Images/asha_tmux.png" width="85%" height="85%">
@@ -141,6 +145,7 @@
                                 <img src="Images/expr2.png" width="85%" height="85%">
                                 <figcaption style="font-size: 12pt;">Initializing eye and lip engines</figcaption>
                             </figure>
+                            <li>Test eye blinks. If the frequency is too fast or the eye movements are jittery, calibrate the eyes as mentioned in the Initial Setup.</li>
                         </ol>
                     </ol> 
                     <br>
@@ -217,11 +222,109 @@
         <div class="row d-flex align-items-center row-wrapper">
             <div class="col">
                 <div class="container instructions-text">
-                    <h4>heading</h4><br>
+                    <h4>Wired Connections for the Avatar Room</h4><br>
                     <ol>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li>Reference the diagram below and make the necessary connections.</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/avatar_v2.jpg" width="50%">
+                            <figcaption style="font-size: 12pt;">Avatar room connections</figcaption>
+                        </figure>
+                    </ol> 
+                    <br>
+                    <h4>Wired Connections for the Operator Room</h4><br>
+                    <ol>
+                        <li>Reference the diagram below and make the necessary connections.</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/operator_v2.jpg" width="50%">
+                            <figcaption style="font-size: 12pt;">Operator room connections</figcaption>
+                        </figure>
+                    </ol> 
+                    <br>
+                    <h4>Congiguring VNC on Volta and Xavier</h4><br>
+                    <ol>
+                        <li>Run the commands below</li>
+                        <kbd>$cd /usr/lib/systemd/user/graphical-session.target.wants<br>
+                            $sudo ln -s ../vino-server.service ./. </kbd>
+                        <li>Configure the VNC server.</li>
+                        <kbd>$gsettings set org.gnome.Vino prompt-enabled false
+                            $gsettings set org.gnome.Vino require-encryption false
+                        </kbd>
+                        <li>Set a password to access the VNC server. Replace ‘thepassword’ with your desired password.</li>
+                        <kbd>$gsettings set org.gnome.Vino authentication-methods "['vnc']"<br>
+                            $gsettings set org.gnome.Vino vnc-password $(echo -n 'thepassword'|base64)                            
+                        </kbd>
+                        <li>Reboot the system so that the settings take effect.</li>
+                        <kbd>$sudo reboot</kbd>                        
+                    </ol> 
+                    <br>
+                    
+                    <h4>Setting static IPs</h4><br>
+                    <ol>
+                        <li>Find the ip range of the network by running the command <kbd>$ifconfig</kbd> <br>
+                        In the below image the inet address is 192.168.100.4 with a subnet mask of 255.255.255.0, therefore the subnet mask ip would be 192.168.100.0/24 </li>
+                        <li>Connect devices on the avatar side one at a time and use Nmap to find out the IP address of each of the devices. The Nmap command to scan IP addresses in a network is <kbd>$nmap -sP &lt;subnet mask ip></kbd>
+                        <br> Example with the above network the command would be <kbd>$nmap -sP 192.168.100.0/24</kbd></li>
+                        <li>Connect to the device using a VNC viewer if required.</li>
+                        <li>Open ubuntu settings and navigate to the network option</li>
+                        <li>Select the appropriate wired connection for which the static IP has to be set</li>
+                        <li>Select the IPv4 tab and set IPv4 method as ‘Manual’</li>
+                        <li>In the address section, enter the current IP address and netmask of the device (found in step 1). The gateway will be similar to the IP address but with the last part of it replaced with the value 1.
+                        <br> Example: If the IP address is 192.168.0.148 then the the gateway address will be 192.168.0.1</li>
+                    </ol>
+                    <h4>Locations to change IPs</h4><br>
+                    <ol>
+                        <li>On Volta</li>
+                        <ol>
+                            <li>Using nano open the bashrc file the command is <kbd>$nano ~/.bashrc</kbd> Set the IP address for Asha and Volta here</li>
+                        </ol>
+                        <li>On Windows PC</li>
+                        <ol>
+                            <li>Open the Zed Streaming Unity project, click on ZED_Rig_Stereo and in the Inspector Pane, change the IP address and port to the IP of the AGX and 40000 respectively.</li>
+                            Save the changes made and Build the project (Shortcut Ctrl+B) and save it to the home screen for ease of deployment.
+                            <li>In <code>avatar/HapticGloves/src/ws_glove.py</code> change static.request_url to IP of the Linux PC on line 22</li>
+                            <li>In <code>path to expre code</code> change the uri to the IP of the Linux PC on line 251</li>
+                        </ol>
+                        <li>On Linux PC</li> 
+                        <ol>
+                            <li>Set the IP addresses in avatar/env file</li>
+                            <kbd>ROS_MASTER_URI=http://&lt;Asha’s IP>:11311<br>
+                            ROS_IP=&lt;Linux PC IP><br>
+                            VR_IP=&lt;Windows PC IP>
+                            </kbd>
+                            <li>Set the IP for Asha in <code>avatar/Hand_Tracking/docker/ik_entrypoint.sh</code></li>
+                            <li>Set the IP for the Windows PC in <code>avatar/Hand_Tracking/src/asha_comm/config/ws_conn_config.yaml</code></li>
+                            <li>Set the IP in <code>imperio/docker/run.env</code></li>
+                            <kbd>ROS_IP=&lt;Linux PC IP><br>
+                            ROS_MASTER_URI=http://&lt;Asha’s IP>:11311 
+                            </kbd>
+                        </ol>
+                    </ol> 
+                    <br>
+                    <h4>Calibrating the BeBop gloves.</h4><br>
+                    <ol>
+                        <li>Open the Be Boop project from unity Hub</li>
+                        <li> Press play on the scene and follow the instructions on the screen to calibrate the gloves.</li>
+                    </ol> 
+                    <br>
+                    <h4>Calibrating the eyes for the VR headset.</h4><br>
+                    <ol>
+                        <li>Turn on one of the controllers and launch steamVR</li>
+                        <li>Instruct the operator to select the VIVE PRO EYE button by pressing down on the trigger button of the controller.</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/eye_1.PNG" width="80%">
+                            <figcaption style="font-size: 12pt;">Locating VIVE PRO EYE button</figcaption>
+                        </figure>
+                        <li>Instruct the operator to follow the instructions on the screen</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/eye_2.PNG" width="80%">
+                            <figcaption style="font-size: 12pt;">Starting eye calibration</figcaption>
+                        </figure>
+                        <li>At the end of the calibration, ask the operator to test if the eyes were calibrated properly by looking at the different dots on the screen and seeing if they light up when the operator focuses on them.
+                            <br>If not, recalibrate the eyes</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/eye_3.PNG" width="80%">
+                                <figcaption style="font-size: 12pt;">Testing eye calibration</figcaption>
+                            </figure>
                     </ol> 
                     <br>
                 </div>
@@ -232,11 +335,11 @@
         <div class="row d-flex align-items-center row-wrapper">
             <div class="col">
                 <div class="container instructions-text">
-                    <h4>heading</h4><br>
+                    <h4>To be released...</h4><br>
                     <ol>
-                        <li></li><br>
-                        <li></li><br>
-                        <li></li><br>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                     </ol>
                 </div>
             </div>
