@@ -120,7 +120,7 @@
                         <li>Set the IP for the windows machine in <code>avatar/Hand_Tracking/src/asha_comm/config/ws_conn_config.yaml</code></li>
                         <li>Set the IP in <code>imperio/docker/run.env</code></li> -->
                         <li>Ensure that the correct IPs have set in all the required locations.</li>
-                        <li>Run <kbd>$tumxinator start asha</kbd> from the avatar directory</li>
+                        <li>Run <kbd>$tmuxinator start asha</kbd> from the avatar directory</li>
                         <figure style="padding:10px ;">
                             <img src="Images/asha_tmux.png" width="85%" height="85%">
                             <figcaption style="font-size: 12pt;">Executing tmuxinator start asha</figcaption>
@@ -132,7 +132,7 @@
                     <ol>
                         <li>Running the Expression Tracking code</li>
                         <ol>
-                            <li>Open <code>path to code</code> with Visual Studio.</li>
+                            <li>Open <code>Expression Tracking/expr_trck.sln</code> with Visual Studio.</li>
                             <li>On line 251, change the uri to the IP of the Linux PC</li>
                             <li>Click play on the Local Windows Debugger</li>
                             <li>Once the script starts executing, enter <kbd>1+Enter</kbd> to initialize the eye and lip engines.</li>
@@ -211,6 +211,13 @@
                                 <img src="Images/csave.png" width="40%" height="40%">
                                 <figcaption style="font-size: 12pt;">Save calibration data</figcaption>
                             </figure>
+                                <li>To load calibration data, shift to the Hand Tracking Tab on the tmux screen.</li>
+                                <ol>
+                                    <li>Press Ctrl+C to stop the current tracking.</li>
+                                    <li>Enter <kbd>hand_tracking_with_calib <calibration_filename>.yaml</kbd></li><br>
+                                        Example: <kbd>hand_tracking_with_calib rushali_calib.yaml</kbd>
+                                </ol>
+                            </figure>
                         </ol> 
                     </ol> 
                     <br>
@@ -240,7 +247,7 @@
                         </figure>
                     </ol> 
                     <br>
-                    <h4>Congiguring VNC on Volta and Xavier</h4><br>
+                    <h4>Configuring VNC on Volta and Xavier</h4><br>
                     <ol>
                         <li>Run the commands below</li>
                         <kbd>$cd /usr/lib/systemd/user/graphical-session.target.wants<br>
@@ -263,7 +270,7 @@
                         <li>Find the ip range of the network by running the command <kbd>$ifconfig</kbd> <br>
                         In the below image the inet address is 192.168.100.4 with a subnet mask of 255.255.255.0, therefore the subnet mask ip would be 192.168.100.0/24 </li>
                         <li>Connect devices on the avatar side one at a time and use Nmap to find out the IP address of each of the devices. The Nmap command to scan IP addresses in a network is <kbd>$nmap -sP &lt;subnet mask ip></kbd>
-                        <br> Example with the above network the command would be <kbd>$nmap -sP 192.168.100.0/24</kbd></li>
+                        <br>Example with the above network the command would be <kbd>$nmap -sP 192.168.100.0/24</kbd></li>
                         <li>Connect to the device using a VNC viewer if required.</li>
                         <li>Open ubuntu settings and navigate to the network option</li>
                         <li>Select the appropriate wired connection for which the static IP has to be set</li>
