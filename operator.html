@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Operator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="operator.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1"><h2>Operator Guide</h2></span>
+        </div>
+    </nav>
+    <ul class="nav nav-tabs">
+        <li class="nav-item" id="step1" onclick="navigateToSection(this.id)">
+            <a class="nav-link active">Step 1: The Equipment </a>
+        </li>
+        <li class="nav-item" id="step2" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Step 2: Asha's Limits</a>
+        </li>
+        <li class="nav-item" id="step3" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Step 3: Wearing the equipment</a>
+        </li>
+        <li class="nav-item" id="step4" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Step 4: Testing the pedals</a>
+        </li>
+        <li class="nav-item" id="step5" onclick="navigateToSection(this.id)">
+            <a class="nav-link">Step 5: Calibration</a>
+        </li>
+    </ul>
+    <section id="step1-section">
+        <div class="row d-flex row-wrapper">
+            <div class="col">
+                <div class="container instructions-text">
+                    <h3>Equipment</h3><br>
+                    <ol>
+                        <li>Chest tracker</li>
+                        The chest tracker, along with the trackers on the gloves, are used to by our Inverse Kinematics (IK) engine. This allows us to map your hand movements to Asha's hand movements.
+                        <br>
+                        <li>Haptic gloves</li>
+                        The haptic gloves provide haptic feedback whenevr Asha's fingertips touches something. It is also used to control Asha's fingers to perform grasping tasks. 
+                        <br>
+                        <li>VR headset</li>
+                        The VR headset is used to create an immersive environment and enables you to see through Asha's eyes (or a camera placed on her head).
+                        <br>
+                        <li>Rudder pedals</li>
+                        The pedals are used to control Asha's "feet", aka her mobility platform. This is used to move Asha around the remote room.
+                        <br>
+                    </ol>
+                </div>
+            </div>
+            <div class="col" style="margin-top:2vh">
+                <div class="container">
+                    <div class="row">
+                        <div class="column">
+                          <img src="Images/chest.jpg" style="width:100%">
+                          Chest Tracker
+                        </div>
+                        <div class="column">
+                          <img src="Images/glove.jpg" style="width:100%">
+                          Haptice Gloves
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="column">
+                          <img src="Images/hmd.jpg" style="width:100%">
+                          VR Headset
+                        </div>
+                        <div class="column">
+                          <img src="Images/pedal.jpg" style="width:100%">
+                          <br>
+                          Rudder pedals
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="step2-section">
+        <div class="row row-wrapper">
+            <div class="col align-items-center" style="margin-left: 2vw;">
+                <div class="container instructions-text">
+                    <h3>Knowing Asha's quirks and limits</h3><br>
+                    There is only one rule... Move slowly.<br><br>
+                    Do not make very quick or jerky movements with Asha, she is a little fussy and will just freeze if she thinks you have moved too fast for her.<br><br>
+                    If she does freeze, simply move your hands to imitate her frozen position and coax her to move by moving your hands slowly.<br><br>
+                    A few of her more specific quirks are listed below.
+                    <ol>
+                        <li>Hands</li>
+                        Asha's hands does not respond the same way as ours. There are a few movements her arms are incapable of.
+                        <ol>
+                            <li>Her arms can not cross over her body.</li>
+                            <li>Her hands cannot meet in the middle. (For safety reasons)</li>
+                            <li>Her arms do not enjoy exercise, i.e. her arms can not stretch out sideways completely.</li>                            
+                        </ol>
+                        <br>
+                        <li>Feet (Her mobility platform)</li>
+                        Asha's mobiltiy platform does not get along well with carpeted floors. She can move forwards and backwards with absolutely no issues.<br><br>
+                        But she can not turn accurately. <br><br>
+                        When asked to turn right or left, she will make the turn. But when you try to move forward after a turn, then she will first turn a little more and only then move forward.<br><br>
+                        So, keep in mind that when you turn her to the left or right, always turn lesser than necessary.<br><br>
+                        This quirk is demonstrated in the video in Step 4: Testing the pedals.
+                        <br>
+                    </ol>
+                </div>
+            </div>
+            <div class="col" style="margin-top:2vh">
+                <div id="player2"></div>
+                
+            </div>
+        </div>
+    </section>
+    <section id="step3-section">
+        <div class="row row-wrapper">
+            <div class="col align-items-center" style="margin-left: 2vw;">
+                <div class="container instructions-text">
+                    <h3>Order in which to wear the equipment:</h3><br>
+                    <ol>
+                        <li>Chest tracker</li><br>
+                        <li>Gloves</li><br>
+                        <li>Rudder pedals</li><br>
+                        <li>Bluetooth headphones</li><br>
+                        <li>VR headset</li><br>
+                    </ol>
+                </div>
+            </div>
+            <div class="col" style="margin-top:2vh">
+                <div id="player3"></div>
+            </div>
+        </div>
+    </section>
+    <section id="step4-section">
+        <div class="row row-wrapper">
+            <div class="col align-items-center" style="margin-left: 2vw;">
+                <div class="container instructions-text">
+                    <h3>Familiarize yourself with the pedals:</h3><br>
+    How to use the pedals:
+                    <pre>
+
+    Single tap (either foot):               Asha moves forward<br>
+    Double tap:                             Asha moves in reverse<br>
+    Rotate right(left foot ahead of right): Asha rotates to the right<br>
+    Rotate left(right foot ahead of left):  Asha rotates left<br>
+    Quick double tap:                       Initializes the pedals
+                    </pre>
+                    To test the pedals, use it to move the little turtle in the simulation environment. 
+                    <br><br>
+                    Take as much time as needed as you will be required to use the pedals without being able to see them (because of the VR headset). 
+                </div>
+            </div>
+            <div class="col">
+                <div id="player4" style="margin-top:2vh"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="step5-section">
+        <div class="row row-wrapper">
+            <div class="col align-items-center" style="margin-left: 2vw;">
+                <div class="container instructions-text">
+                    <h3>Calibrating the IK:</h3><br>
+                    In order to control Asha's hands smoothly, you would be required to calibrate our Inverse Kinematics engine.<br><br>
+                    To do so, you would be required to hold the poses shown below when instructed.<br>
+                    <ol>
+                        <li>Arms wide apart</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/wide.jpg" width="40%" height="40%">
+                        </figure>
+                        <li>Arms to the front</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/front.jpg" width="40%" height="40%">
+                        </figure>
+                        <li>Arms to the side</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/side.jpg" width="40%" height="40%">
+                        </figure>
+                    </ol>                    
+                    <br>
+                    At the end of the calibrating sequence, you are required to hold Asha's neutral pose as shown below.
+                    <div class="row">
+                        <div class="column">
+                          <img src="Images/zero.jpg" width="100%"> 
+                        </div>
+                        <div class="column">
+                          <img src="Images/zero_side.jpg" width="100%" >
+                        </div>
+                    </div>
+                    <br><br>
+                    <h3>Calibrating the eyes for the VR headset.</h3><br>
+                    <ol>
+                        <li>Wear the VR headset and hold on to one of the VR controllers.</li>
+                        <li>Select the VIVE PRO EYE button by pressing down on the trigger button of the controller.</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/eye_1.PNG" width="80%">
+                            <figcaption style="font-size: 12pt;">Locating VIVE PRO EYE button</figcaption>
+                        </figure>
+                        <li>Follow the instructions on the screen</li>
+                        <figure style="padding:10px ;">
+                            <img src="Images/eye_2.PNG" width="80%">
+                            <figcaption style="font-size: 12pt;">Starting eye calibration</figcaption>
+                        </figure>
+                        <li>At the end of the calibration, test if the eyes were calibrated properly by looking at the different dots on the screen and seeing if they light up when the operator focuses on them.
+                            <br>If not, recalibrate the eyes</li>
+                            <figure style="padding:10px ;">
+                                <img src="Images/eye_3.PNG" width="80%">
+                                <figcaption style="font-size: 12pt;">Testing eye calibration</figcaption>
+                            </figure>
+                    </ol> 
+                    <h3>Calibrating the BeBop gloves.</h3><br>
+                    <ol>
+                        <li> Follow the instructions on the screen to calibrate the gloves.</li>
+                    </ol> 
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+    </script>
+    <script src="operator.js"></script>
+</body>
+
+</html>
