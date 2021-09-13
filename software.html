@@ -35,7 +35,8 @@
         <div class="row d-flex align-items-center row-wrapper">
             <div class="col">
                 <div class="container instructions-text">
-                    <h4>Setting up Asha</h4>
+                    <ol>
+                        <li><h4>Setting up Asha</h4>
                     <ol>
                         <li>Power Asha on and make sure all the motors in her hands are set to the zero position. </li>
                         <li>Using Teamviewer connect to Asha’s NUC using her static IP when connected to an external network. </li>
@@ -45,8 +46,9 @@
                             For example if her IP on eno1 is 192.168.0.110, then command would be <kbd>$hrsdk start --local_ip 192.168.0.110</kbd></li>
                         <li>To verify if everything is working as expected, go to <code>&lt;ASHA’S IP>:8000/#/motors</code> using a web browser on any device on the same network or on the NUC using teamviewer.</li>
                     </ol>
+                    </li>
                     <br>
-                    <h4>Setting up Volta</h4>
+                    <li><h4>Setting up Volta</h4>
                     <ol>
                         <li>Power on the volta and wait for the LEDs to start blinking blue.</li>
                         <li>SSH into the using the command <kbd>$ssh volta-4@&lt;VOLTA’S IP></kbd> with password: Botsync@123</li>
@@ -55,29 +57,33 @@
                         <li>Run <kbd>$roslaunch volta_base on_boot.launch</kbd> </li>
                         The LED strips on the side of the Volta will now be a solid green colour
                     </ol> 
+                </li>
                     <br>
-                    <h4>Setting up Jetson AGX</h4>
+                    <li><h4>Setting up Jetson AGX</h4>
                     <ol>
                         <li>Power on the Xavier and make sure both the dynamixel head mount and the Zed mini camera are connected to it</li>
                         <li>SSH into the Xavier using the command <kbd>$ssh ashagpu@&lt;XAVIER’S IP></kbd> Password: ashagpu </li>
-                        <li>For the ZED</li>
+                        <li>For the ZED
                         <ol>
                             <li>Navigate to the folder with the built zed files by running <kbd> $cd zed-examples/camera streaming/sender/cpp/build </kbd></li>
                             <li>Run <kbd>./ZED_Streaming_Sender</kbd></li>
                             If there is an error, then disconnect and reconnect ZED's USB cable from the AGX. 
-                        </ol> 
-                        <li>For the Dynamixel</li>
+                        </ol> </li>
+                        <li>For the Dynamixel
                         <ol>
                             <li>Create a new ssh session using the same command as step 2.</li>
                             <li>Run <kbd>$cd Hand_Tracking_dev/src/asha_head/scripts</kbd></li>
+                            <li>Run <kbd>$export ROS_MASTER_URI=http://&lt;Asha's IP>:11311</kbd></li>
+                            <li>Run <kbd>$export ROS_IP=&lt;Jetson's IP></kbd></li>
                             <li>Run <kbd>$python2 dynamixel_interface.py</kbd></li>
                             If the screen shows a red error message, adjust the dynamixel position in the head mount till it becomes stiff and the error message stops printing.
-                        </ol> 
+                        </ol> </li>
                     </ol> 
+                    </li>
                     <br>
-                    <h4>Setting up the Windows PC</h4>
+                    <li><h4>Setting up the Windows PC</h4>
                     <ol>
-                        <li>SteamVR</li>
+                        <li>SteamVR
                         <ol>
                             <li>Start the SteamVR app on the desktop</li>
                             <li>Open menu and select Room Setup. Follow instructions on the screen to set up the VR play area.</li>
@@ -88,12 +94,12 @@
                                 <img src="Images/steamVR.PNG" width="30%" height="30%">
                                 <figcaption style="font-size: 12pt;">StreamVR dialog box</figcaption>
                             </figure>
-                        </ol>
-                        <li>Running the Zed camera stream on the VR headset</li>
+                        </ol></li>
+                        <li>Running the Zed camera stream on the VR headset
                         <ol>
                             <li>Click on the Zed Streaming unity app to start the streaming.</li>
-                        </ol>
-                        <li>Running code for Hand Tracking and Haptic gloves</li>
+                        </ol></li>
+                        <li>Running code for Hand Tracking and Haptic gloves
                         <ol>
                             <li>Open <code>avatar/VR/ws_server.py</code> with VS Code.</li>
                             <li>Run ws_server.py without debugging (Shortcut is Ctrl+F5).</li>
@@ -110,16 +116,20 @@
                             </figure>
                             Switch on the gloves, the indicator LED will turn from green to blue once it connects.
                             <li>Test finger curls and haptic feedback. If necessary, calibrate the gloves as mentioned in Initial Setup.</li>
-                        </ol>                        
+                        </ol> </li>                       
                     </ol> 
+                </li>
                     <br>
-                    <h4>Setting up the Linux PC</h4>
-                    <ol>
-                        <!-- <li>Set the appropriate IPs in <code>avatar/env file</code></li>
-                        <li>Set the IP for asha in <code>avatar/Hand_Tracking/docker/ik_entrypoint.sh</code></li>
-                        <li>Set the IP for the windows machine in <code>avatar/Hand_Tracking/src/asha_comm/config/ws_conn_config.yaml</code></li>
-                        <li>Set the IP in <code>imperio/docker/run.env</code></li> -->
-                        <li>Ensure that the correct IPs have set in all the required locations.</li>
+                    <li><h4>Setting up the Linux PC</h4>
+                    <ol>                    
+                        <li>Ensure that the correct IPs have set in all the required locations.
+                        <ol>
+                            <li>Set the appropriate IPs in <code>avatar/env file</code></li>
+                            <li>Set the IP for asha in <code>avatar/Hand_Tracking/docker/ik_entrypoint.sh</code></li>
+                            <li>Set the IP for the windows machine in <code>avatar/Hand_Tracking/src/asha_comm/config/ws_conn_config.yaml</code></li>
+                            <li>Set the IP in <code>imperio/docker/run.env</code></li>
+                            Note: Refer to 5. Locations to change IPs in Initial set up for detailed instructions.
+                        </ol></li>
                         <li>Run <kbd>$tmuxinator start asha</kbd> from the avatar directory</li>
                         <figure style="padding:10px ;">
                             <img src="Images/asha_tmux.png" width="85%" height="85%">
@@ -127,10 +137,10 @@
                         </figure>
                         <li>Run <kbd>$tmuxinator start audio</kbd> from the avatar directory</li>
                     </ol> 
+                </li>
                     <br>
-                    <h4>Back to the Windows PC</h4>
-                    <ol>
-                        <li>Running the Expression Tracking code</li>
+                    <li><h4>Back to the Windows PC</h4>
+                        Running the Expression Tracking code
                         <ol>
                             <li>Open <code>Expression Tracking/expr_trck.sln</code> with Visual Studio.</li>
                             <li>On line 251, change the uri to the IP of the Linux PC</li>
@@ -147,13 +157,13 @@
                             </figure>
                             <li>Test eye blinks. If the frequency is too fast or the eye movements are jittery, calibrate the eyes as mentioned in the Initial Setup.</li>
                         </ol>
-                    </ol> 
+                </li>
                     <br>
-                    <h4>Calibrating the IK</h4><br>
+                    <li><h4>Calibrating the IK</h4><br>
                     <ol>
                         <li>Wait for tmuxinator code to complete the initialisation steps on the Linux PC</li>
                         <li>On a web browser on the Linux PC, go to localhost:5000/</li>
-                        <li>Follow the calibration steps below and instruct the operator to hold the appropriate poses while the position is being recorded.</li>
+                        <li>Follow the calibration steps below and instruct the operator to hold the appropriate poses while the position is being recorded.
                         <ol>
                             <li>Click on start calibration</li>
                             <figure style="padding:10px ;">
@@ -211,16 +221,18 @@
                                 <img src="Images/csave.png" width="40%" height="40%">
                                 <figcaption style="font-size: 12pt;">Save calibration data</figcaption>
                             </figure>
-                                <li>To load calibration data, shift to the Hand Tracking Tab on the tmux screen.</li>
+                                <li>To load calibration data, shift to the Hand Tracking Tab on the tmux screen.
                                 <ol>
                                     <li>Press Ctrl+C to stop the current tracking.</li>
-                                    <li>Enter <kbd>$hand_tracking_with_calib &lt;calibration_filename>.yaml</kbd></li><br>
-                                        Example: <kbd>$hand_tracking_with_calib rushali_calib.yaml</kbd>
-                                </ol>
+                                    <li>Enter <kbd>hand_tracking_with_calib <calibration_filename>.yaml</kbd></li><br>
+                                        Example: <kbd>hand_tracking_with_calib rushali_calib.yaml</kbd>
+                                </ol></li>
                             </figure>
-                        </ol> 
+                        </ol> </li>
                     </ol> 
                     <br>
+                    </li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -229,25 +241,26 @@
         <div class="row d-flex align-items-center row-wrapper">
             <div class="col">
                 <div class="container instructions-text">
-                    <h4>Wired Connections for the Avatar Room</h4><br>
                     <ol>
-                        <li>Reference the diagram below and make the necessary connections.</li>
+                    <li><h4>Wired Connections for the Avatar Room</h4><br>
+                    
+                        Reference the diagram below and make the necessary connections.
                         <figure style="padding:10px ;">
                             <img src="Images/avatar_v2.jpg" width="50%">
                             <figcaption style="font-size: 12pt;">Avatar room connections</figcaption>
                         </figure>
-                    </ol> 
+                    
+                    </li>
                     <br>
-                    <h4>Wired Connections for the Operator Room</h4><br>
-                    <ol>
-                        <li>Reference the diagram below and make the necessary connections.</li>
+                    <li><h4>Wired Connections for the Operator Room</h4><br>
+                    Reference the diagram below and make the necessary connections.
                         <figure style="padding:10px ;">
                             <img src="Images/operator_v2.jpg" width="50%">
                             <figcaption style="font-size: 12pt;">Operator room connections</figcaption>
                         </figure>
-                    </ol> 
+                    </li>
                     <br>
-                    <h4>Configuring VNC on Volta and Xavier</h4><br>
+                    <li><h4>Configuring VNC on Volta and Xavier</h4><br>
                     <ol>
                         <li>Run the commands below</li>
                         <kbd>$cd /usr/lib/systemd/user/graphical-session.target.wants<br>
@@ -263,9 +276,9 @@
                         <li>Reboot the system so that the settings take effect.</li>
                         <kbd>$sudo reboot</kbd>                        
                     </ol> 
-                    <br>
-                    
-                    <h4>Setting static IPs</h4><br>
+                    </li>
+                    <br>                    
+                    <li><h4>Setting static IPs</h4><br>
                     <ol>
                         <li>Find the ip range of the network by running the command <kbd>$ifconfig</kbd> <br>
                         In the below image the inet address is 192.168.100.4 with a subnet mask of 255.255.255.0, therefore the subnet mask ip would be 192.168.100.0/24 </li>
@@ -278,20 +291,22 @@
                         <li>In the address section, enter the current IP address and netmask of the device (found in step 1). The gateway will be similar to the IP address but with the last part of it replaced with the value 1.
                         <br> Example: If the IP address is 192.168.0.148 then the the gateway address will be 192.168.0.1</li>
                     </ol>
-                    <h4>Locations to change IPs</h4><br>
+                    </li>
+                    <br>
+                    <li><h4>Locations to change IPs</h4><br>
                     <ol>
-                        <li>On Volta</li>
+                        <li>On Volta
                         <ol>
-                            <li>Using nano open the bashrc file the command is <kbd>$nano ~/.bashrc</kbd> Set the IP address for Asha and Volta here</li>
-                        </ol>
-                        <li>On Windows PC</li>
+                            <li>Using nano, open the bashrc file the command by typing <kbd>$nano ~/.bashrc</kbd>. Set the IP address for Asha and Volta here</li>
+                        </ol></li>
+                        <li>On Windows PC
                         <ol>
                             <li>Open the Zed Streaming Unity project, click on ZED_Rig_Stereo and in the Inspector Pane, change the IP address and port to the IP of the AGX and 40000 respectively.</li>
                             Save the changes made and Build the project (Shortcut Ctrl+B) and save it to the home screen for ease of deployment.
                             <li>In <code>avatar/HapticGloves/src/ws_glove.py</code> change static.request_url to IP of the Linux PC on line 22</li>
                             <li>In <code>path to expre code</code> change the uri to the IP of the Linux PC on line 251</li>
-                        </ol>
-                        <li>On Linux PC</li> 
+                        </ol></li>
+                        <li>On Linux PC
                         <ol>
                             <li>Set the IP addresses in avatar/env file</li>
                             <kbd>ROS_MASTER_URI=http://&lt;Asha’s IP>:11311<br>
@@ -304,16 +319,18 @@
                             <kbd>ROS_IP=&lt;Linux PC IP><br>
                             ROS_MASTER_URI=http://&lt;Asha’s IP>:11311 
                             </kbd>
-                        </ol>
+                        </ol></li> 
                     </ol> 
+                    </li>
                     <br>
-                    <h4>Calibrating the BeBop gloves.</h4><br>
+                    <li><h4>Calibrating the BeBop gloves.</h4><br>
                     <ol>
                         <li>Open the Be Boop project from unity Hub</li>
                         <li> Press play on the scene and follow the instructions on the screen to calibrate the gloves.</li>
                     </ol> 
+                    </li>
                     <br>
-                    <h4>Calibrating the eyes for the VR headset.</h4><br>
+                    <li><h4>Calibrating the eyes for the VR headset.</h4><br>
                     <ol>
                         <li>Turn on one of the controllers and launch steamVR</li>
                         <li>Instruct the operator to select the VIVE PRO EYE button by pressing down on the trigger button of the controller.</li>
@@ -333,7 +350,9 @@
                                 <figcaption style="font-size: 12pt;">Testing eye calibration</figcaption>
                             </figure>
                     </ol> 
+                    </li>
                     <br>
+                    </ol>
                 </div>
             </div>
         </div>

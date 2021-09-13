@@ -68,7 +68,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player3', {
         height: '390',
         width: '640',
-        videoId: 'LKHV40EqKXw',
+        videoId: 'TysJMC0Xk08',
         playerVars: {
             'playsinline': 1
         },
@@ -80,7 +80,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player4', {
         height: '390',
         width: '640',
-        videoId: 'TysJMC0Xk08',
+        videoId: 'LKHV40EqKXw',
         playerVars: {
             'playsinline': 1
         },

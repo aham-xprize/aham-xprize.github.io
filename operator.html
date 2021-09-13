@@ -25,10 +25,10 @@
             <a class="nav-link">Step 2: Asha's Limits</a>
         </li>
         <li class="nav-item" id="step3" onclick="navigateToSection(this.id)">
-            <a class="nav-link">Step 3: Wearing the equipment</a>
+            <a class="nav-link">Step 3: Testing the pedals</a>
         </li>
         <li class="nav-item" id="step4" onclick="navigateToSection(this.id)">
-            <a class="nav-link">Step 4: Testing the pedals</a>
+            <a class="nav-link">Step 4: Wearing the equipment</a>
         </li>
         <li class="nav-item" id="step5" onclick="navigateToSection(this.id)">
             <a class="nav-link">Step 5: Calibration</a>
@@ -36,7 +36,7 @@
     </ul>
     <section id="step1-section">
         <div class="row d-flex row-wrapper">
-            <div class="col">
+            <div class="col align-items-center" style="margin-left: 2vw;">
                 <div class="container instructions-text">
                     <h3>Equipment</h3><br>
                     <ol>
@@ -44,7 +44,7 @@
                         The chest tracker, along with the trackers on the gloves, are used to by our Inverse Kinematics (IK) engine. This allows us to map your hand movements to Asha's hand movements.
                         <br>
                         <li>Haptic gloves</li>
-                        The haptic gloves provide haptic feedback whenevr Asha's fingertips touches something. It is also used to control Asha's fingers to perform grasping tasks. 
+                        The haptic gloves provide haptic feedback whenever Asha's fingertips touch something. It is also used to control Asha's fingers to perform grasping tasks. 
                         <br>
                         <li>VR headset</li>
                         The VR headset is used to create an immersive environment and enables you to see through Asha's eyes (or a camera placed on her head).
@@ -64,7 +64,7 @@
                         </div>
                         <div class="column">
                           <img src="Images/glove.jpg" style="width:100%">
-                          Haptice Gloves
+                          Haptic Gloves
                         </div>
                       </div>
                       <div class="row">
@@ -92,12 +92,13 @@
                     If she does freeze, simply move your hands to imitate her frozen position and coax her to move by moving your hands slowly.<br><br>
                     A few of her more specific quirks are listed below.
                     <ol>
-                        <li>Hands</li>
+                        <li>Hands
                         Asha's hands does not respond the same way as ours. There are a few movements her arms are incapable of.
                         <ol>
                             <li>Her arms can not cross over her body.</li>
                             <li>Her hands cannot meet in the middle. (For safety reasons)</li>
-                            <li>Her arms do not enjoy exercise, i.e. her arms can not stretch out sideways completely.</li>                            
+                            <li>Her arms do not enjoy exercise, i.e. her arms can not stretch out sideways completely.</li>    
+                        </li>                        
                         </ol>
                         <br>
                         <li>Feet (Her mobility platform)</li>
@@ -105,7 +106,7 @@
                         But she can not turn accurately. <br><br>
                         When asked to turn right or left, she will make the turn. But when you try to move forward after a turn, then she will first turn a little more and only then move forward.<br><br>
                         So, keep in mind that when you turn her to the left or right, always turn lesser than necessary.<br><br>
-                        This quirk is demonstrated in the video in Step 4: Testing the pedals.
+                        This quirk is demonstrated in the video in Step 3: Testing the pedals.
                         <br>
                     </ol>
                 </div>
@@ -120,14 +121,19 @@
         <div class="row row-wrapper">
             <div class="col align-items-center" style="margin-left: 2vw;">
                 <div class="container instructions-text">
-                    <h3>Order in which to wear the equipment:</h3><br>
-                    <ol>
-                        <li>Chest tracker</li><br>
-                        <li>Gloves</li><br>
-                        <li>Rudder pedals</li><br>
-                        <li>Bluetooth headphones</li><br>
-                        <li>VR headset</li><br>
-                    </ol>
+                    <h3>Familiarize yourself with the pedals:</h3><br>
+    How to use the pedals:
+                    <pre>
+
+    Single pedal pressed (either foot):                   Asha moves forward<br>
+    Both pedals pressed:                                  Asha moves in reverse<br>
+    Rotate pedals clockwise(left foot ahead of right):    Asha rotates to the right<br>
+    Rotate pedals anticlockwise(right foot ahead of left):Asha rotates left<br>
+    Quick tap with both pedals:                           Initializes the pedals
+                    </pre>
+                    To test the pedals, use it to move the little turtle in the simulation environment. 
+                    <br><br>
+                    Take as much time as needed as you will be required to use the pedals without being able to see them (because of the VR headset).                     
                 </div>
             </div>
             <div class="col" style="margin-top:2vh">
@@ -139,19 +145,14 @@
         <div class="row row-wrapper">
             <div class="col align-items-center" style="margin-left: 2vw;">
                 <div class="container instructions-text">
-                    <h3>Familiarize yourself with the pedals:</h3><br>
-    How to use the pedals:
-                    <pre>
-
-    Single tap (either foot):               Asha moves forward<br>
-    Double tap:                             Asha moves in reverse<br>
-    Rotate right(left foot ahead of right): Asha rotates to the right<br>
-    Rotate left(right foot ahead of left):  Asha rotates left<br>
-    Quick double tap:                       Initializes the pedals
-                    </pre>
-                    To test the pedals, use it to move the little turtle in the simulation environment. 
-                    <br><br>
-                    Take as much time as needed as you will be required to use the pedals without being able to see them (because of the VR headset). 
+                    <h3>Order in which to wear the equipment:</h3><br>
+                    <ol>
+                        <li>Chest tracker</li><br>
+                        <li>Gloves</li><br>
+                        <li>Rudder pedals</li><br>
+                        <li>Bluetooth headphones</li><br>
+                        <li>VR headset</li><br>
+                    </ol>                    
                 </div>
             </div>
             <div class="col">
